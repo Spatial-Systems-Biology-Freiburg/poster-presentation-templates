@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Linux - Hands on</title>
+
+		<link rel="stylesheet" href="reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="reveal.js/dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="reveal.js/plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                <section>
+                    <h2>Linux - Hands on</h2>
+                    <h3></h3>
+                </section>
+				<section data-markdown>
+                    <textarea data-template>
+                        ## Interesting Facts about Linux
+                        - Created in 1991 as private project of Linus Torvalds
+                        - Strictly speaking only the kernel (core of operating system)
+                        - Written in C (Brian Kernighan, Dennis Ritchie in 1978)
+                        - GNU Project by Richard Stallman provided GCC (GNU Compiler Collection) and many other utilities
+                        - In General: Many Free/Open Source programs to run on Linux kernel
+                    </textarea>
+                </section>
+				<section data-markdown data-separator-vertical="^\n----\n">
+					<textarea data-template>
+						## Distributions
+						- Packages applications to create whole operating system
+						- Package-Manager responsible for managing installed applications
+						- Can be very specialized
+							- Servers (Facebook, Google, Amazon, Almost every website, ...)
+							- Docker-Containers (github workflows, gitlab continous integration, ...)
+							- Embedded Devices (smart fridge, toaster, baby-cam, ...)
+							- Supercomputers (2015 >95%, 2020 100% of top 500)
+							- Network Infrastructure (router, network switch, ...)
+							- Mobile Phones (android, pinephone, ...)
+							- Mars Helicopter
+							- ...
+						- Often has very particular philosophical and technical viewpoints
+
+						---
+
+						## Popular Distributions
+						- Debian (1993) Servers, Personal Computers, known for stability<!-- .element: class="fragment" -->
+						- Ubuntu (2004) based on Debian, developed by company Canonical, newer packages at small loss of stability<!-- .element: class="fragment" -->
+						- RedHat Enterprise Linux (2000) by company Red Hat, for power users and servers<!-- .element: class="fragment" -->
+						- OpenSuse (2005) Rolling-Release Model (no versions), general-purpose distro<!-- .element: class="fragment" -->
+						- ArchLinux (2002) Rolling-Release Model, KISS Principle: Keep it Simple and Stupid, highly customizable, very good documentation<!-- .element: class="fragment" -->
+						- Gentoo (2002) extremely customizable, every package needs to be compiled, only for experienced Linux Gurus, good documentation<!-- .element: class="fragment" -->
+
+						[See also: wikipedia.org/wiki/Linux_distribution](https://en.wikipedia.org/wiki/Linux_distribution)<!-- .element: class="fragment" -->
+
+						---
+
+						## My Recommendations
+						| Distro | Comments |
+						|--------|----------|
+						| Debian<!-- .element: class="fragment" --> | Widely used (especially in universities), very stable, not the newest packages<!-- .element: class="fragment" --> |
+						| Ubuntu-Derivative<!-- .element: class="fragment" --> | more recent packages, not as stable as Debian, large userbase<!-- .element: class="fragment" --> |
+						| Fedora<!-- .element: class="fragment" --> | Derivative from RedHat Enterprise Linux, used in workstations, overall very good performance, used by Linus Torvalds<!-- .element: class="fragment" --> |
+						| Manjaro<!-- .element: class="fragment" --> | Derivative from ArchLinux but much more stable, rolling release (no versioned releases), very customizable<!-- .element: class="fragment" --> |
+
+						---
+
+						## Desktop Environments
+						Not every Distro supports all Desktop Environments.<br>
+						Sometimes one Distro has one DE.
+						- KDE Plasma<!-- .element: class="fragment" -->
+						- Gnome: Cinnamon (Linux Mint), Unity (Ubuntu)<!-- .element: class="fragment" -->
+						- Xfce<!-- .element: class="fragment" -->
+						- Lxde + LxQt<!-- .element: class="fragment" -->
+
+						---
+
+
+						## Text Editors
+						### Command Line
+						- Emacs (popular, highly extendable)
+						- Vi(m) (completely different to traditional text editors)
+						- Nano (very simple, only basic functionalities)
+
+						---
+
+						## Bash Commands 1
+						```bash
+							# Change to your home folder (absolute path)
+							cd ~
+							# List every file and directory in current directory
+							ls
+							# List also hidden files
+							ls -a
+							# List files starting with "Do"
+							ls Do*
+							# Change to the folder Documents (relative path, equivalent to /home/jonas/Documents in my case)
+							cd ~/Documents
+							# Create directory with name biology_is_nice
+							mkdir biology_is_nice
+							# Create empty file with name and_physics_too
+							touch and_physics_too.txt
+						```
+
+						---
+
+						## Bash Commands 2
+						```bash
+							# Find out which shell you are currently using (Environment Variable)
+							echo $SHELL
+							# Read the manual of the program grep
+							man grep
+							# Search for example
+							/example
+							# Show all possible commands (press h) then quit with q or Ctrl+C
+							# Paste the content of your clipboard to the command line (Ctrl+Shift+V)
+							# Instead of deleting everything interrupt the command with Ctrl+C
+							# Print current working directory
+							pwd
+						```
+
+						---
+
+						## Bash Commands 3.1
+						```bash
+							# Output the text "1+1=3" to the console
+							echo 1+1=2
+							# Do an actual calculation and print the result
+							echo $((1+1))
+							# Store a value in a variable
+							RESULT=$((1+3))
+							# Output that variable
+							echo $RESULT
+							# Store the current working directory in a variable
+							DIR=$(pwd)
+							echo $DIR
+						```
+
+						----
+
+						## Bash Commands 3.2
+						```bash
+							# List information on your operating system
+							uname -a
+							# List all usb devices
+							lsusb
+							# List all disks (hard-drive, ssd, usb-storage, ...)
+							sudo fdisk -l
+							# List all PCI Devices (graphics card, network adapter, ...)
+							lspci
+						```
+
+						---
+
+						## Bash Commands 4
+						```bash
+							# Write a for loop over all files/folders in the current directory where every element is printed with an appended "_output" string
+							for name in $(ls);
+							do
+								echo $name"_output";
+							done
+							# Execute the last command again (press the "up" key)
+							# Hint: You can do this multiple times, even going back with the "down" key
+							# Generate a sequence of numbers
+							seq 0 10
+							# Write a for loop which prints all squares of the numbers from 0 to 10 (use the previously gained knowledge)
+						```
+					</textarea>
+				</section>
+			</div>
+		</div>
+
+		<script src="reveal.js/dist/reveal.js"></script>
+		<script src="reveal.js/plugin/notes/notes.js"></script>
+		<script src="reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="reveal.js/plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				width: 1500,
+				height: 1000,
+
+				navigationMode: "grid",
+
+				slideNumber: 'c/t',
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
