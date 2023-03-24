@@ -1,0 +1,100 @@
+\documentclass{tikzposter} % See Section 3
+
+% Here used for indenting itemize environments
+\usepackage{enumitem}
+
+% Set the font for the entire document
+\usepackage{arev}
+\usepackage[T1]{fontenc}
+
+% Insert this before the input of the freiburg theme to override the size of the title
+% This is an optional definition and can also be commented out
+\def\titleleftrelativelength{0.85}
+
+\input{uni-freiburg-theme/theme}
+\usetheme{fdm-freiburg-theme}
+
+% The title needs to be written inside a parbox for linebreaks to work correctly
+\title{\parbox{\linewidth}{I love cats}}
+\author{\parbox{\linewidth}{
+    Chili$^1$
+    Cara$^2$
+}}
+\institute{$^1$Institute of Meow, $^2$University of Purr}
+
+
+\begin{document}
+    \maketitle
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Block to describe the overall scope of the project
+    \block{}{
+        \centering
+        This is just a small summary of the project.
+        In total we just want to say that cats are the best pets.
+    }
+
+    \begin{columns}
+        \column{0.33}
+        \block{Simple heading}{With some text}
+
+        \column{0.33}
+        \block{Another heading}{And another text}
+
+        \column{0.33}
+        \block{
+            And finally ...}{No text ... ?\\
+            But this block is looonger!\\
+            Much much longer!
+        }
+    \end{columns}
+
+    \begin{columns}
+        \column{0.4}
+        \begin{subcolumns}
+            \subcolumn{0.5}
+            \block{Very tiny block}{With not much content}
+            \subcolumn{0.5}
+            \block{Also small}{Even less content}
+        \end{subcolumns}
+        \column{0.6}
+        \block{A HUGE BLOCK}{In comparison to the other ones in this row.}
+    \end{columns}
+
+    % Divide the page in two columns with equal width
+    \begin{columns}
+        \column{0.5}
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        \block{My Uni did this\hfill\unilogo}
+        {
+            It is so fantastic to have cats as pets.\\
+            This block is also stretched to the end!
+            \stretchlastblock
+        }
+
+        \column{0.5}
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        % Block displaying the optogenetic control circuit
+        \block{Another Uni did this\hfill\unilogo[uni-freiburg-theme/fdm_logo.jpg][height=1em, trim={-1em 0 -1em 0}]}
+        {
+            They also have cats by mine are better
+        }
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        \block{
+            Here are some reasons why my\hfill\unilogo\\
+            cats are awesome!}
+        {
+            \begin{itemize}
+                \item They eat a lot (Sir Eatalot)
+                \item they sleep a lot
+                \item They cuddle and are cute
+            \end{itemize}
+            This block will not be stretched until the end.
+        }
+    \end{columns}
+
+    \makefooter{\Large
+    Acknowledgements: Voldemort$^3$\\
+    $^3$International Data-Independent Observatory for Theology (IDIOT)}
+\end{document}

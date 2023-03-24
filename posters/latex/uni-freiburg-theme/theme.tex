@@ -1,0 +1,180 @@
+% Need for calculation of different length scales of title etc.
+\usepackage[nomessages]{fp}
+% Needed to define the new command for including the university logo
+\usepackage{xparse}
+% Needed to calculate the current position to stretch the last block
+\usepackage{zref-savepos}
+% Use to include uni logos
+\usepackage{wrapfig}
+
+% Define the colors to be used
+\definecolorstyle{fdm-freiburg-colors} {
+    \definecolor{darkblue}{HTML}{00004A}
+    \definecolor{blue}{HTML}{344A9A}
+    \definecolor{blue80}{HTML}{5D6BAD}
+    \definecolor{blue60}{HTML}{868DC2}
+    \definecolor{blue40}{HTML}{AFB1D8}
+    \definecolor{blue20}{HTML}{D7D8EC}
+}{
+    % Background Colors
+    \colorlet{backgroundcolor}{white}
+    \colorlet{framecolor}{darkblue}
+    % Title Colors
+    \colorlet{titlefgcolor}{white}
+    \colorlet{titlebgcolor}{darkblue}
+    % Block Colors
+    \colorlet{blocktitlebgcolor}{darkblue}
+    \colorlet{blocktitlefgcolor}{white}
+    \colorlet{blockbodybgcolor}{white}
+    \colorlet{blockbodyfgcolor}{black}
+    % Innerblock Colors
+    \colorlet{innerblocktitlebgcolor}{white}
+    \colorlet{innerblocktitlefgcolor}{black}
+    \colorlet{innerblockbodybgcolor}{darkblue!30!white}
+    \colorlet{innerblockbodyfgcolor}{black}
+    % Note colors
+    \colorlet{notefgcolor}{black}
+    \colorlet{notebgcolor}{blue!50!white}
+    \colorlet{noteframecolor}{blue}
+}
+
+% Define how long the title is on the left side
+\ifdef{\titleleftrelativelength}{}{\def\titleleftrelativelength{0.8}}
+
+\FPeval{\titlerightrelativelength}{1-\titleleftrelativelength}
+\newlength{\titlewidthabsolute}
+\newlength{\titlewidthleftabsolute}
+\newlength{\titlewidthrightabsolute}
+\setlength{\titlewidthabsolute}{811mm}
+\setlength{\titlewidthleftabsolute}{\titleleftrelativelength\titlewidthabsolute - 30mm}
+\setlength{\titlewidthrightabsolute}{\titlerightrelativelength\titlewidthabsolute - 25mm}
+
+
+% Define a new titlestyle where FDM logo and university logo are included
+\definetitlestyle{fdm-freiburg-title}{
+    % A0 size = 841mm x 1189mm
+    % Default margins are 15mm on both sides
+    % => width = 841mm - 2*15mm = 811mm
+    width=\titlewidthabsolute,
+    % Use the same margin for top vertical space
+    titletotopverticalspace=15mm,
+    % Use slightly more margin for space to next blocks
+    titletoblockverticalspace=15mm
+}{
+    \begin{scope}
+        % Draw Rectangle for text of title
+        \draw[color=blocktitlebgcolor, fill=titlebgcolor]
+            (\titleposleft,\titleposbottom) rectangle (\titleposleft + \titleleftrelativelength\titleposright-\titleleftrelativelength\titleposleft - 10mm,\titlepostop);
+        % Draw the logo of the university
+        \node[below right, inner sep=0] (uni-fr-logo) at (\titleposleft + \titleleftrelativelength\titleposright-\titleleftrelativelength\titleposleft,\titlepostop)
+            {\includegraphics
+                [width=\titlerightrelativelength\titleposright-\titlerightrelativelength\titleposleft,
+                height=\titlerightrelativelength\titleposright-\titlerightrelativelength\titleposleft]
+                {uni-freiburg-theme/UFR-vorlage-designsystem-typo-farben-V1.910-1024x724-cropped.png}
+            };
+    \end{scope}
+}
+
+% Also adjust title centering and linebreaks
+\settitle{
+    \parbox{\titlewidthleftabsolute}{
+        \vbox to \titlewidthrightabsolute {
+            \color{titlefgcolor}
+            {\bfseries \Huge \sc \@title \par}
+            \vfil
+            \vspace{1em}
+            {\huge \@author \par}
+            \vfil
+            \vspace*{1em}
+            {\Large \@institute}
+            \vfil
+        }
+    }
+}
+
+% Define a new blockstyle which is simply a rectangle with small border
+\defineblockstyle{fdm-freiburg-blockstyle}{
+    titleleft,
+    bodyverticalshift=5mm, linewidth=2pt,
+    titleinnersep=6mm, bodyinnersep=0.2cm
+}{
+    \draw[color=framecolor, fill=blockbodybgcolor] (blockbody.south west)
+        rectangle (blockbody.north east);
+    \ifBlockHasTitle
+        \draw[color=framecolor, fill=blocktitlebgcolor] (blocktitle.south west)
+            rectangle (blocktitle.north east);
+    \fi
+}
+
+% Include everything previously defined in a layout theme
+\definelayouttheme{fdm-freiburg-theme}{
+    \usecolorstyle{fdm-freiburg-colors}
+    \usebackgroundstyle{Default}
+    \usetitlestyle{fdm-freiburg-title}
+    \useblockstyle{fdm-freiburg-blockstyle}
+    \useinnerblockstyle{Default}
+    \usenotestyle{Default}
+}
+
+% Hide watermark in bottom right corner
+\tikzposterlatexaffectionproofoff
+
+\def\footerminimumheight{4cm}
+
+% Define a new command that will place the footer
+\newcommand{\makefooter}[1]{
+    \node [
+        color=darkblue,
+        above right,
+        inner sep=0.4cm,
+        minimum width=\paperwidth - 30mm,
+        minimum height=\footerminimumheight,
+        align=left,
+        draw,
+        fill=darkblue,
+    ] at ([shift={(0.5*\pgflinewidth + 15mm,0.5*\pgflinewidth + 15mm)}]bottomleft) {
+        \parbox{\paperwidth - 40mm}{
+        % Save position of Footer. This parameter is used in the \stretchlastblock macro down below    
+        \zsavepos{FooterPos}
+        % Include the logos of FDM and University of Freiburg
+        \begin{minipage}{\linewidth-25em}
+            % Set color of text white
+            \color{white}#1
+        \end{minipage}%
+        \begin{minipage}{25em}
+            \colorbox{white}{\includegraphics[height=4em]{uni-freiburg-theme/fdm_logo.jpg}}
+            \colorbox{white}{\includegraphics[height=4em, trim={-1.25em -0em -1.25em -0em}]{uni-freiburg-theme/wortmarke-grundform-universitaet_freiburg_blau__rgb.png}}
+        \end{minipage}
+        }
+    };
+}
+
+% Define a new command that will include the Uni-Freiburg Logo
+% This is meant to be used in the title of a block
+\NewDocumentCommand{\unilogo}{O{uni-freiburg-theme/wortmarke-grundform-universitaet_freiburg_blau__rgb.png} D[]{height=1em, trim={-1.5em -0.25em -1.5em -0.25em}}}{
+    \colorbox{white}{\includegraphics[#2]{#1}}
+}
+
+% Define new command that stretches the last block until it reaches the footer
+% First define counter to differentiate between the different last-blocks
+\newcounter{lastblocks}
+\setcounter{lastblocks}{1}
+% This is only a helper variable and will be overwritten continuously
+\newlength{\difftofooter}
+
+\NewDocumentCommand{\stretchlastblock}{}{
+    % Save current position to file. This value will be read out in the second compile run
+    \zsavepos{LastBlockPosition\arabic{lastblocks}}
+    % Set the helper variable to current position
+    \setlength{\difftofooter}{\zposy{LastBlockPosition\arabic{lastblocks}}sp}
+    % Subtract the position of the footer
+    \addtolength{\difftofooter}{-\zposy{FooterPos}sp}
+    % Also subtract half a line for words
+    \addtolength{\difftofooter}{-0.5em}
+    % And subtract separation as defined above
+    \addtolength{\difftofooter}{-15mm}
+    % Create a vbox that expands the last block until it reaches the end
+    \vspace{\difftofooter}
+    % Increase the counter for next variable
+    \addtocounter{lastblocks}{1}
+}
