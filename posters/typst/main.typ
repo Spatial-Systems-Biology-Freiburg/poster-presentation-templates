@@ -46,8 +46,8 @@
 		heading: [#set align(center);#image(height: 80pt, "images/cellular_raza_dark_mode.svg")],
 	)[
 		#columns(2, gutter: 0.5*spacing)[
-			- New Agent-Based Modeling Framework
-			- Extensive use of generics allows for unparalleled flexibility in model design
+			- New Agent-Based Modeling Tool
+			- Extensive use of generics allows for unparalleled flexibility
 			- Written in Rust
 			- Parallelized (via OS-threads)
 		
