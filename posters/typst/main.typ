@@ -106,10 +106,8 @@ pub trait Interaction<Pos, Vel, Force, Inf = ()> {
             ]),
 		),
 		caption: [
-			Cells are interacting via force mechanics that are governed by radial potentials.
-			Interactions between similarly-colored cells are attractive at long and repulse at short distances.
-			For interactions between distinctly-colored cells the attractive part vanishes.
-			The initially randomized state (A) organizes into a pattern which separates the two species (B).
+			Cells with species-specific interactions.
+			The initially randomized state (A) organizes itself and separates the two species (B).
 		])
 	]
 
@@ -117,21 +115,16 @@ pub trait Interaction<Pos, Vel, Force, Inf = ()> {
 		#figure(stack(dir: ltr,
 			box([
                 #image("images/bacteria_cells_at_iter_0000088000.png", width: 49.5%)
-                #place(top+left, dx: 10pt, dy: 10pt, rect(text("A", fill: white), fill: uni_dark_blue, inset: 10pt))
+                #place(top+left, dx: 10pt, dy: 10pt, rect(text("2D", fill: white), fill: uni_dark_blue, inset: 10pt))
             ]),
             box(width: 1%),
 			box([
                 #image("images/bacteria_population-3d-0000-cropped.png", width: 49.5%)
-                #place(top+left, dx: 10pt, dy: 10pt, rect(text("B", fill: white), fill: uni_dark_blue, inset: 10pt))
+                #place(top+left, dx: 10pt, dy: 10pt, rect(text("3D", fill: white), fill: uni_dark_blue, inset: 10pt))
             ])
 		), caption: [
-            Spatio-Temporal patterns inspired by #cite("kawasakiModelingSpatioTemporalPatterns1997","matsushitaInterfaceGrowthPattern1998"). The simulation contains $~$500,000 cellular agents which consume extracellular nutrients, grow, divide and self-organize into a branched pattern.
-            Cells are placed inside a centered cuboid and the domain is evenly filled with nutrients.
-            (A) The background and cells show their nutrient concentration.
-            Brighter colours, correspond to higher and darker colours to lower concentrations.
-            Dark cells have reached a dormant state.
-            The pattern is forming on the tips of the outer-most branches.
-            (B) shows the same simulation in 3D.
+            Spatio-Temporal patterns inspired by #cite("kawasakiModelingSpatioTemporalPatterns1997","matsushitaInterfaceGrowthPattern1998"). Cells ($~$500,000) consume extracellular nutrients, grow, divide and self-organize into a branched pattern.
+			Brighter colors show higher nutrient concentrations.
 		])
 	]
 
