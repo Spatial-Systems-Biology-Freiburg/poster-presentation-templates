@@ -26,28 +26,22 @@
 
 /// START OF THE DOCUMENT
 #title_box(
-	[`cellular_raza` - Agent-Based Modeling of Complex Cellular Biological Systems],
+	[`cellular_raza` - Novel Flexibility in Design of Agent-Based Models in Cellular Systems],
 	authors: "Jonas Pleyer¹, Christian Fleck¹",
 	institutes: "¹Freiburg Center for Data-Analysis and Modeling",
     image: image("/UFR-Siegel-white.png"),
 )
 
+#column_box()[
+	#set par(justify: true)
+	#set align(center)
+	Agent-Based Models (ABMs) allow researchers to describe complex cellular systems in a mechanistic manner but can also abstract over less-known processes.
+	It is often desirable to exchange only parts of the model eg. changing the spatial representation of cells from a spherical interaction potential to an elliptical.
+	Existing tools lack in flexibility and cannot change their internal representation of cells.
+	To solve these problems we created `cellular_raza`, a novel library that offers previously unknown flexibility in model design while retaining excellent performance.
+]
+
 #columns(2, gutter: spacing)[
-	#column_box(heading: "Agent-Based Modeling")[
-		#set par(justify: true)
-		Constructing mathematical models of complex cellular systems is a challenging task.
-		Biological cells can be described by many properties such as their cycle, death, physical interaction, reaction mechanics and multiple different interactions with the extracellular environment.
-		From a modeling perspective, on one hand some complexity is required to accurately depict our system of interest.
-		But on the other hand increasing complexity makes it nearly impossible to reduce the model such that meaningful predictions and comparisons with actual data are possible.
-
-		In order to combat these problems, Agent-Based Models (ABMs) have been proposed.
-		They abstract away some of the complex properties of cells by treating them as individual agents with rules that govern their behavior.
-		A simulation is initially populated with such agents in a physical domain and then evolved continuously in time.
-
-        A common difficulty arises when researches try to migrate from one model aspect to another such as different physical representations of their cells to study the effect of short-range interactions on larger systems.
-        To solve these problems we created `cellular_raza`, a novel framework that allows for unknown flexibility in model design while retaining excellent performance.
-	]
-
 	#column_box(
 		heading: [#set align(center);#image(height: 80pt, "images/cellular_raza_dark_mode.svg")],
 	)[
