@@ -10,19 +10,19 @@
 
 #set text(
     font: "Arial",
-    size: 33pt
+	size: 33pt,
 )
 
 #let spacing = 1.2em
 #set block(spacing: spacing)
+#set columns(gutter: spacing)
+#update_layout(spacing: spacing)
 
 // Define colors as given by coroprate design of uni freiburg
 #let uni_dark_blue = rgb("#1d154d")
 
 #set_theme(uni_fr)
-#update_theme(
-    heading_color: white,
-)
+#set_layout(layout_a0)
 
 /// START OF THE DOCUMENT
 #title_box(
@@ -41,7 +41,7 @@
 	To solve these problems we created `cellular_raza`, a novel library that offers previously unknown flexibility in model design while retaining excellent performance.
 ]
 
-#columns(2, gutter: spacing)[
+#columns(2)[
 	#column_box(
 		heading: [#set align(center);#image(height: 80pt, "images/cellular_raza_dark_mode.svg")],
 	)[
