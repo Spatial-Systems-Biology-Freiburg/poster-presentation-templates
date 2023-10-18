@@ -61,7 +61,7 @@
 		]
 	]
 
-	#column_box(heading: [Rust Traits are Cellular Properties], stretch_to_bottom: spacing)[
+	#column_box(heading: [Rust Traits are Cellular Properties], stretch_to_bottom: true)[
 		This shows the abstract trait used to define cellular interactions via force mechanics.
         Users implement these traits to specify cellular behavior.
         #figure([
@@ -141,7 +141,7 @@ pub trait Interaction<Pos, Vel, Force, Inf = ()> {
             - Support common export formats (such as `*.vtk` files)
         ]]
 
-	#bibliography_box("/cellular_raza.bib", title: "Sources", stretch_to_bottom: spacing)
+	#bibliography_box("/cellular_raza.bib", title: "Sources", stretch_to_bottom: true)
 ]
 
 #bottom_box(
