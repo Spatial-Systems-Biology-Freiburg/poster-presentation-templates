@@ -7,22 +7,21 @@
     "a0",
     margin: 1.5cm,
 )
-
+#set_layout(layout_a0)
 #set text(
     font: "Arial",
-	size: 33pt,
+	size: layout_a0.at("body_size"),
 )
 
 #let spacing = 1.2em
 #set block(spacing: spacing)
 #set columns(gutter: spacing)
-#update_layout(spacing: spacing)
+#update_layout(spacing, spacing)
+
+#set_theme(uni_fr)
 
 // Define colors as given by coroprate design of uni freiburg
 #let uni_dark_blue = rgb("#1d154d")
-
-#set_theme(uni_fr)
-#set_layout(layout_a0)
 
 /// START OF THE DOCUMENT
 #title_box(
