@@ -2,5 +2,5 @@
 	path = presentations/reveal-js/reveal.js
 	url = https://github.com/hakimel/reveal.js
 [submodule "posters/typst/typst-posters"]
-	path = posters/typst/typst-posters
+	path = posters/typst/typst-scienceposters
 	url = git@github.com:jonaspleyer/typst-posters
