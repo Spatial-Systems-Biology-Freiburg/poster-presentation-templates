@@ -3,20 +3,9 @@
 
 // Define overall formatting defaults for the document.
 // These settings can be overwritten later on.
-#set page(
-    "a0",
-    margin: 1.5cm,
-)
-#set_layout(layout_a0)
-#set text(
-    font: "Arial",
-	size: layout_a0.at("body_size"),
-)
-
+#set page(margin: 1.5cm)
 #let spacing = 1.2em
-#set block(spacing: spacing)
-#set columns(gutter: spacing)
-#update_layout(spacing, spacing)
+#show: poster_layout.with(spacing: spacing)
 
 #set_theme(uni_fr)
 
@@ -40,7 +29,7 @@
 	To solve these problems we created `cellular_raza`, a novel library that offers previously unknown flexibility in model design while retaining excellent performance.
 ]
 
-#columns(2, gutter: spacing)[
+#columns(2)[
 	#column_box(
 		heading: [Features],
 	)[
@@ -109,7 +98,7 @@
 
 	#column_box(
 		heading: [Roadmap],
-		stretch_to_bottom: true,
+		stretch_to_next: true,
 	)[#columns(2)[
 		- Stabilize user API
 		- Additional backends (GPUs, MPI)
@@ -135,7 +124,7 @@
                 #place(top+left, dx: 10pt, dy: 10pt, rect(text("3D", fill: white), fill: uni_dark_blue, inset: 10pt))
             ])
 		), caption: [
-            Spatio-Temporal patterns inspired by #cite("kawasakiModelingSpatioTemporalPatterns1997","matsushitaInterfaceGrowthPattern1998"). Cells ($~$500,000) consume extracellular nutrients, grow, divide and self-organize into a branched pattern.
+            Spatio-Temporal patterns inspired by @kawasakiModelingSpatioTemporalPatterns1997 @matsushitaInterfaceGrowthPattern1998. Cells ($~$500,000) consume extracellular nutrients, grow, divide and self-organize into a branched pattern.
 			Brighter colors indicate higher nutrient concentrations.
 		])
 	]
@@ -176,7 +165,7 @@
 		])
 	]
 
-	#bibliography_box("/cellular_raza.bib", title: "Sources", stretch_to_bottom: true)
+	#bibliography_box("/cellular_raza.bib", title: "Sources", stretch_to_next: true)
 ]
 
 #bottom_box(
